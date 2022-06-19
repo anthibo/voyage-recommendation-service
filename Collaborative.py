@@ -27,8 +27,7 @@ def create_matrix(df):
     # Map Ids to indices
     user_mapper = dict(zip(np.unique(df["userId"]), list(range(N))))
     place_mapper = dict(zip(np.unique(df["placeId"]), list(range(M))))
-    print('place mapper is')
-    print(place_mapper)
+  
       
     # Map indices to IDs
     user_inv_mapper = dict(zip(list(range(N)), np.unique(df["userId"])))
@@ -42,16 +41,14 @@ def create_matrix(df):
     return X, user_mapper, place_mapper, user_inv_mapper, place_inv_mapper
   
 X, user_mapper, place_mapper, user_inv_mapper, place_inv_mapper = create_matrix(placesrating)
-print("X is")
-print(X)
+
 
 #collobarative
 #getting similar movies
 def find_similar_movies(place_id, X, k, metric='cosine', show_distance=False):
       
     neighbour_ids = []
-    print('place id')
-    print(place_id)
+
     place_ind = place_mapper[place_id]
     place_vec = X[place_ind]
     k+=1
