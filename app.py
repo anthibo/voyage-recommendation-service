@@ -37,21 +37,19 @@ app = Flask(__name__)
 
 
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def main():
     if(request.method=='GET'):
         place_titles = dict(zip(placesrating['placeId'], placesrating['name']))
-        print('places titles is here')
-        print(place_titles)
+     
         places_ids=placesrating['placeId'][placesrating['rating']==placesrating['rating'].max()].unique()
         place_id=places_ids[0]
-        similar_ids = find_similar_movies(place_id, X, k=2)
-        place_title = place_titles[place_id]
-        rec_places ={}
+        similar_ids = find_similar_movies(place_id, X, k=10)
+        rec_places =[]
         for i in similar_ids:
-            rec_places.update({"id": i, "name": place_titles[i]})
+            rec_places.append({"id": i, "name": place_titles[i]})
             
-        return rec_places
+        return {'places': rec_places}
 
 
           
