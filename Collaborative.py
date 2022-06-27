@@ -9,7 +9,7 @@ from sklearn.neighbors import NearestNeighbors
 from sqlalchemy import create_engine
 
 
-engine = create_engine('postgresql://zbcmbfzmjnndzy:3f0a309231286726890d8a780817742997f034c641aa6fee59e5fc7bccf3ec4a@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/d4h9ulopjka84k')
+engine = create_engine('postgresql://zcczqdxovrvwch:0e7ce6d159becf9918fe22b5f706f6ddfc3279a38bf4e03320554b53d82150b4@ec2-23-23-151-191.compute-1.amazonaws.com:5432/d2iap8c27jv8o8')
 placesrating=pd.read_sql('select place_ratings."placeId", place_ratings."userId", place_ratings."rating", places."name" from place_ratings inner join places on place_ratings."placeId" = places.id ;',engine)
 
 # print(placesrating)
