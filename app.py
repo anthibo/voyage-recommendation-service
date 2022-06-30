@@ -1,7 +1,7 @@
 import json
 from uuid import UUID
 from flask import Flask, request,jsonify
-#import jwt 
+import jwt 
 import difflib
 import pandas as pd
 import numpy as np
@@ -42,14 +42,16 @@ def check(user, placesrating):
     #highval=res.Activity.max()
     return activity
 
-
+JWT_SECRET='VoyageAppGraduationProject2022AnthiboSuhailaFarahMustafaSaieedTeamPlusUltraGGWPCatsVolleyCookingAyHaga'
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def main():
-    token = request.headers.get('Authorization')
+    token = request.headers.get('Authorization')[len('Bearer '):]
     print(token)
     # decode the token 
+    user = jwt.decode(token, JWT_SECRET, algorithms="HS256")
+    print(user)
     # get user from token then check for history
     if(request.method=='GET'):
         returned_response = {}
@@ -64,7 +66,7 @@ def main():
         for i in similar_ids:
             top_rated_places.append({"id": i, "name": place_titles[i]})
         returned_response['topRatedPlaces'] = top_rated_places
-        activity = check(user=UUID('7dcf78ec-7d8a-413b-962d-24abaf9ea0ff'), placesrating = placesrating)
+        activity = check(user=UUID(user['id']), placesrating = placesrating)
         suggested_places_flag = False
         if(activity != None):
             suggested_places_flag = True
