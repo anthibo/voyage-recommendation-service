@@ -10,7 +10,8 @@ from sqlalchemy import create_engine
 
 database_url = 'postgresql://zcczqdxovrvwch:0e7ce6d159becf9918fe22b5f706f6ddfc3279a38bf4e03320554b53d82150b4@ec2-23-23-151-191.compute-1.amazonaws.com:5432/d2iap8c27jv8o8'
 engine = create_engine(database_url)
-placesrating=pd.read_sql('select place_ratings."placeId", place_ratings."userId", place_ratings."rating", places."name" from place_ratings inner join places on place_ratings."placeId" = places.id ;',engine)
+placesrating=pd.read_sql('select place_ratings."placeId", place_ratings."userId", place_ratings."rating", places."name", places."activity_type" from place_ratings inner join places on place_ratings."placeId" = places.id ;',engine)
+
 
 # print(placesrating)
 # placesrating = pd.read_sql("place_ratings",engine)
@@ -61,13 +62,4 @@ def find_similar_movies(place_id, X, k, metric='cosine', show_distance=False):
     return neighbour_ids
   
   
-#place_titles = dict(zip(places['Place_id'], ratings['Place']))
-  
-#place_id=ratings['rating'].max()
-  
-#similar_ids = find_similar_movies(place_id, X, k=10)
-#place_title = place_titles[place_id]
-  
-#print(f"Since you visited {place_title}")
-#for i in similar_ids:
-   # print(place_titles[i])
+
