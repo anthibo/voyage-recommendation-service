@@ -1,3 +1,4 @@
+from distutils.sysconfig import PREFIX
 import json
 from uuid import UUID
 from flask import Flask, request,jsonify
@@ -44,16 +45,26 @@ def check(user, placesrating):
 
 JWT_SECRET='VoyageAppGraduationProject2022AnthiboSuhailaFarahMustafaSaieedTeamPlusUltraGGWPCatsVolleyCookingAyHaga'
 
+def get_token(header):
+    PREFIX = 'Bearer'
+    if not header.startswith(PREFIX):
+        raise ValueError('Invalid token')
+
+    return header[len(PREFIX):]
 
 @app.route('/home', methods=['GET', 'POST'])
 def main():
-    token = request.headers.get('Authorization')[len('Bearer '):]
-    print(token)
-    # decode the token 
-    user = jwt.decode(token, JWT_SECRET, algorithms="HS256")
-    print(user)
     # get user from token then check for history
     if(request.method=='GET'):
+        header = request.headers.get('Authorization')
+        if not header:
+            return {'error': 'EL TOKEN YA SOSO :DDDDDD'}, 403
+        token = header[len('Bearer '):]
+        print(token)
+        
+        # decode the token 
+        user = jwt.decode(token, JWT_SECRET, algorithms="HS256")
+        print(user)
         returned_response = {}
         
         placesrating = get_places_ratings()        
