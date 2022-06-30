@@ -12,9 +12,9 @@ database_url = 'postgresql://zcczqdxovrvwch:0e7ce6d159becf9918fe22b5f706f6ddfc32
 engine = create_engine(database_url)
 placesrating=pd.read_sql('select place_ratings."placeId", place_ratings."userId", place_ratings."rating", places."name", places."activity_type" from place_ratings inner join places on place_ratings."placeId" = places.id ;',engine)
 
+
 # print(placesrating)
 # placesrating = pd.read_sql("place_ratings",engine)
-print(placesrating)
 
 
 
@@ -48,7 +48,6 @@ X, user_mapper, place_mapper, user_inv_mapper, place_inv_mapper = create_matrix(
 def find_similar_movies(place_id, X, k, metric='cosine', show_distance=False):
       
     neighbour_ids = []
-
     place_ind = place_mapper[place_id]
     place_vec = X[place_ind]
     k+=1

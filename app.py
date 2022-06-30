@@ -45,8 +45,6 @@ def check(user, placesrating):
 
 
 
-
-
 @app.route('/home', methods=['GET', 'POST'])
 def main():
     token = request.headers.get('Authorization')
@@ -77,7 +75,6 @@ def main():
         returned_response['suggestedPlacesFlag'] = suggested_places_flag
             
         return returned_response
-
 
           
     if(request.method=='POST'):
