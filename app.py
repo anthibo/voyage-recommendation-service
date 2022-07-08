@@ -1,4 +1,5 @@
 from distutils.sysconfig import PREFIX
+import os
 from uuid import UUID
 from flask import Flask, request,jsonify
 import jwt 
@@ -35,7 +36,7 @@ def check(user, placesrating):
     #highval=res.Activity.max()
     return activity
 
-JWT_SECRET='VoyageAppGraduationProject2022AnthiboSuhailaFarahMustafaSaieedTeamPlusUltraGGWPCatsVolleyCookingAyHaga'
+JWT_SECRET=os.environ.get('JWT_SECRET')
 
 def get_token(header):
     PREFIX = 'Bearer'
