@@ -1,20 +1,12 @@
 from distutils.sysconfig import PREFIX
-import json
 from uuid import UUID
 from flask import Flask, request,jsonify
 import jwt 
-import difflib
-import pandas as pd
-import numpy as np
-import sklearn
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
-import Collaborative
-from Collaborative import placesrating,create_matrix,find_similar_movies,X
-from sqlalchemy import create_engine, false
-import Content
+from Collaborative import find_similar_movies,X
 from Content import get_recommendations,get_places_ratings
 
 
